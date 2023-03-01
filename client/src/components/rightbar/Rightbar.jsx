@@ -1,8 +1,29 @@
 import './rightbar.css'
 import { Users } from '../../dummyData'
 import Online from '../online/Online'
+import { useEffect, useState } from 'react'
 
-export default function Rightbar({ profile }) {
+export default function Rightbar({ user }) {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER
+  const [relationship, setRelationship] = useState('')
+
+  useEffect(() => {
+    switch (user?.relationship) {
+      case 1:
+        setRelationship('Single')
+        break
+      case 2:
+        setRelationship('Married')
+        break
+      case 3:
+        setRelationship('Complicated')
+        break
+      default:
+        break
+    }
+
+  }, [user])
+
   const HomeRightbar = () => {
     return (
       <>
@@ -33,24 +54,24 @@ export default function Rightbar({ profile }) {
        <div className="rightbarInfo">
         <div className="rightbarInfoItem">
           <span className="rightbarInfoKey">City:</span>
-          <span className="rightbarInfoValue">New York</span>
+          <span className="rightbarInfoValue">{ user.city }</span>
         </div>
         
         <div className="rightbarInfoItem">
           <span className="rightbarInfoKey">From:</span>
-          <span className="rightbarInfoValue">Madrid</span>
+          <span className="rightbarInfoValue">{ user.from }</span>
         </div>
 
         <div className="rightbarInfoItem">
           <span className="rightbarInfoKey">Relationship:</span>
-          <span className="rightbarInfoValue">Married</span>
+          <span className="rightbarInfoValue">{ relationship }</span>
         </div>
        </div>
 
        <h4 className='rightbarTitle'>User Friends</h4>
        <div className="rightbarFollowings">
         <div className="rightbarFollowing">
-          <img src="/assets/person/1.jpeg" alt="" className='rightbarFollowingImg' />
+          <img src={ `${ PF }person/1.jpeg` } alt="" className='rightbarFollowingImg' />
           <span className="rightbarFollowingName">John Carter</span>
         </div>
        </div>
@@ -62,7 +83,7 @@ export default function Rightbar({ profile }) {
     <div className='rightbar'>
       <div className="rightbarWrapper">
         {
-          profile ?
+          user ?
           <ProfileRightbar />
           : <HomeRightbar />
         }
