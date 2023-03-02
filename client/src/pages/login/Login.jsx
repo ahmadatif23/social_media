@@ -30,7 +30,7 @@ export default function Login() {
                         <input required ref={ email } placeholder='Email' type='email' className="loginInput" />
                         <input required ref={ password } minLength="6" placeholder='Password' type='password' className="loginInput" />
 
-                        <button className="loginButton" disabled={ isFetching } >{ isFetching ? <CircularProgress size='25px' /> : 'Log In' }</button>
+                        <button className="loginButton" type='submit' disabled={ isFetching } >{ isFetching ? <CircularProgress size='25px' /> : 'Log In' }</button>
 
                         <span className="loginForgot">Forgot Password?</span>
 
